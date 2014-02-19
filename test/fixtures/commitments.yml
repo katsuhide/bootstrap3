@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  is_completed: false
+  due_date: 2014-02-20
+  status: MyString
+
+two:
+  title: MyString
+  is_completed: false
+  due_date: 2014-02-20
+  status: MyString

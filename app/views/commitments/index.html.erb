@@ -1,0 +1,33 @@
+<h1>Listing commitments</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class="hidden-xs">Title</th>
+      <th class="hidden-xs">Is Completed</th>
+      <th class="hidden-xs">Due Date</th>
+      <th class="hidden-xs">Status</th>
+      <th class="hidden-xs"></th>
+      <th class="hidden-xs"></th>
+      <th class="hidden-xs"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commitments.each do |commitment| %>
+    <tr>
+      <td><%= commitment.title %></td>
+      <td><%= commitment.is_completed %></td>
+      <td><%= commitment.due_date %></td>
+      <td><%= commitment.status %></td>
+      <td><%= link_to 'Show', commitment, class:"btn btn-primary btn-sm" %></td>
+      <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-primary btn-sm" %></td>
+      <td><%= link_to 'Destroy', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Commitment', new_commitment_path %>

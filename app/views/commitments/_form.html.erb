@@ -1,0 +1,56 @@
+<%= form_for(@commitment) do |f| %>
+<% if @commitment.errors.any? %>
+<div id="error_explanation">
+        <h2><%= pluralize(@commitment.errors.count, "error") %> prohibited this commitment from being saved:</h2>
+
+        <ul>
+                <% @commitment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+        </ul>
+</div>
+<% end %>
+
+<div class="row">
+        <div class="col-md-4" style="text-align:right">
+                <%= f.label :title %>
+        </div>
+        <div class="col-md-8">
+                <%= f.text_field :title, :placeholder => "title input" %>
+        </div>
+</div>
+<div class="row">
+        <div class="col-md-4" style="text-align:right">
+                <%= f.label :is_completed %><br>
+        </div>
+        <div class="col-md-8">
+                <%= f.check_box :is_completed %>
+        </div>
+</div>
+<div class="row">
+        <div class="col-md-4" style="text-align:right">
+                <%= f.label :due_date %><br>
+        </div>
+        <div class="col-md-8">
+                <%= f.date_select :due_date %>
+        </div>
+</div>
+<div class="row">
+        <div class="col-md-4" style="text-align:right">
+                <%= f.label :status %><br>
+        </div>
+        <div class="col-md-8">
+                <% status_array = [["Doing", "D"], ["D", "AAAAA"], ["Success", "S"], ["Failure", "F"]] %>
+                <%= f.select(:status, options_for_select(status_array)) %>
+        </div>
+</div>
+<div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+                <div class="actions">
+                        <%= f.submit :class => "btn btn-primary" %>
+                </div>
+        </div>
+</div>
+<% end %>
