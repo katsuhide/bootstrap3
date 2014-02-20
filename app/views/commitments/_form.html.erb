@@ -40,8 +40,7 @@
                 <%= f.label :status %><br>
         </div>
         <div class="col-md-8">
-                <% status_array = [["Doing", "D"], ["D", "AAAAA"], ["Success", "S"], ["Failure", "F"]] %>
-                <%= f.select(:status, options_for_select(status_array)) %>
+                <%= f.select(:status, [["Doing", "D"],  ["Success", "S"], ["Failure", "F"]] , :selected => @commitment.status )%>
         </div>
 </div>
 <div class="row">

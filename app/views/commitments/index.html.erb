@@ -1,5 +1,6 @@
 <h1>Listing commitments</h1>
 
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,15 +15,16 @@
   </thead>
 
   <tbody>
+    <% status = {"D" => "Doing", "S" => "Success", "F" => "Failure"} %>
     <% @commitments.each do |commitment| %>
     <tr>
       <td><%= commitment.title %></td>
-      <td><%= commitment.is_completed %></td>
+      <td><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
       <td><%= commitment.due_date %></td>
-      <td><%= commitment.status %></td>
+      <td><%= status[commitment.status] %></td>
       <td><%= link_to 'Show', commitment, class:"btn btn-primary btn-sm" %></td>
       <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-primary btn-sm" %></td>
-      <td><%= link_to 'Destroy', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
+      <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
     </tr>
     <% end %>
   </tbody>
