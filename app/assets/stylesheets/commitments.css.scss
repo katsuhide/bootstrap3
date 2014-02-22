@@ -1,3 +1,22 @@
 // Place all the styles related to the Commitments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	padding-top: 70px;
+}
+
+.glyphicon-ok {
+	font-size: 2rem;
+	color: #5cb85c;
+}
+
+.glyphicon-remove {
+	font-size: 2rem;
+	color: #d9534f;
+}
+
+.glyphicon-question-sign {
+	font-size: 2rem;
+	color: #f0ad4e;
+}

@@ -1,33 +1,40 @@
 <h1>Listing commitments</h1>
 
-
 <table class="table table-striped">
-  <thead>
-    <tr>
-      <th class="hidden-xs">Title</th>
-      <th class="hidden-xs">Is Completed</th>
-      <th class="hidden-xs">Due Date</th>
-      <th class="hidden-xs">Status</th>
-      <th class="hidden-xs"></th>
-      <th class="hidden-xs"></th>
-      <th class="hidden-xs"></th>
-    </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th class="hidden-xs">Is Completed</th>
+            <th class="hidden-xs">Title</th>
+            <th class="hidden-xs">Due Date</th>
+            <th class="hidden-xs">Status</th>
+            <th class="hidden-xs"></th>
+            <th class="hidden-xs"></th>
+            <th class="hidden-xs"></th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <% status = {"D" => "Doing", "S" => "Success", "F" => "Failure"} %>
-    <% @commitments.each do |commitment| %>
-    <tr>
-      <td><%= commitment.title %></td>
-      <td><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
-      <td><%= commitment.due_date %></td>
-      <td><%= status[commitment.status] %></td>
-      <td><%= link_to 'Show', commitment, class:"btn btn-primary btn-sm" %></td>
-      <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-primary btn-sm" %></td>
-      <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
-    </tr>
-    <% end %>
-  </tbody>
+    <tbody>
+        <% status = {"D" => "Doing", "S" => "Success", "F" => "Failure"} %>
+        <% @commitments.each do |commitment| %>
+        <tr>
+            <td><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
+            <td><%= commitment.title %></td>
+            <td><%= commitment.due_date %></td>
+            <% if commitment.status == 'S' %>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <% elsif commitment.status == "F" %>
+            <td><span class="glyphicon glyphicon-remove"></span></td>
+            <% else %>
+            <td><span class="glyphicon glyphicon-question-sign"></span></td>
+            <% end %>
+
+            <!-- <td><%= status[commitment.status] %></td> -->
+            <td><%= link_to 'Show', commitment, class:"btn btn-primary btn-sm" %></td>
+            <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-primary btn-sm" %></td>
+            <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
+        </tr>
+        <% end %>
+    </tbody>
 </table>
 
 <br>
