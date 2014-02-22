@@ -14,9 +14,9 @@
     </thead>
 
     <tbody>
-        <% @commitments.each do |commitment| %>
+        <% @commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
         <tr>
-            <td><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
+            <td style="text-align:center"><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
             <td><%= commitment.title %></td>
             <td><%= commitment.due_date %></td>
             <% if commitment.status == 'S' %>

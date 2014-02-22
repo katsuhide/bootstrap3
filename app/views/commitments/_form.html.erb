@@ -12,38 +12,49 @@
 <% end %>
 
 <div class="row">
-        <div class="col-md-4" style="text-align:right">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
                 <%= f.label :title %>
         </div>
         <div class="col-md-8">
-                <%= f.text_field :title, :placeholder => "title input" %>
+                <%= f.text_area :title, :placeholder => "commitment input", :rows => "3", class:"form-control"%>
         </div>
+        <div class="col-md-1"></div>
 </div>
 <div class="row">
-        <div class="col-md-4" style="text-align:right">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
                 <%= f.label :is_completed %><br>
         </div>
         <div class="col-md-8">
                 <%= f.check_box :is_completed %>
         </div>
+        <div class="col-md-1"></div>
 </div>
 <div class="row">
-        <div class="col-md-4" style="text-align:right">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
                 <%= f.label :due_date %><br>
         </div>
         <div class="col-md-8">
                 <%= f.date_select :due_date %>
         </div>
+        <div class="col-md-1"></div>
 </div>
-<div class="row">
-        <div class="col-md-4" style="text-align:right">
+ <div class="row" >
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
                 <%= f.label :status %><br>
         </div>
         <div class="col-md-8">
-                <%= f.select(:status, [["Doing", "D"],  ["Success", "S"], ["Failure", "F"]] , :selected => @commitment.status )%>
+                <% options = [["Doing", "D"],  ["Success", "S"], ["Failure", "F"]] %>
+                <% selected_status =  @commitment.status.nil? ? "D" : @commitment.status %>
+                <% disable_options = ["S", "F", "D"].reject{|str| str == selected_status} %>
+                <%= f.select :status, options, :disabled => disable_options %>
         </div>
+        <div class="col-md-1"></div>
 </div>
-<div class="row">
+ <div class="row">
         <div class="col-md-4">
         </div>
         <div class="col-md-8">
