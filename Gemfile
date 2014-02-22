@@ -47,3 +47,6 @@ gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# mailgun
+gem 'rest_client'
