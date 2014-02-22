@@ -50,3 +50,6 @@ gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
 
 # mailgun
 gem 'rest_client'
+
+# newrelic
+gem 'newrelic_rpm'
