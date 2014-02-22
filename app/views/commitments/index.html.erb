@@ -14,7 +14,6 @@
     </thead>
 
     <tbody>
-        <% status = {"D" => "Doing", "S" => "Success", "F" => "Failure"} %>
         <% @commitments.each do |commitment| %>
         <tr>
             <td><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
@@ -27,8 +26,6 @@
             <% else %>
             <td><span class="glyphicon glyphicon-question-sign"></span></td>
             <% end %>
-
-            <!-- <td><%= status[commitment.status] %></td> -->
             <td><%= link_to 'Show', commitment, class:"btn btn-primary btn-sm" %></td>
             <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-primary btn-sm" %></td>
             <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-primary btn-sm" %></td>
