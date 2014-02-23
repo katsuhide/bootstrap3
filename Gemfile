@@ -53,3 +53,6 @@ gem 'rest_client'
 
 # newrelic
 gem 'newrelic_rpm'
+
+# google analytics
+gem 'google-analytics-rails'
