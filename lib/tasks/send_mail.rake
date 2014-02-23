@@ -21,6 +21,7 @@ def create_remind_mail
 	mail['text'] = <<-EOS
 コミットメントを登録しましょう！
 今日も１日頑張るで〜
+http://committer-test.herokuapp.com/
 EOS
 
 	return mail
