@@ -3,6 +3,7 @@
 API_KEY = ENV['MAILGUN_API_KEY']
 DOMAIN = ENV['MAILGUN_DOMAIN']
 API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/#{DOMAIN}"
+MAIL_LIST = ENV['MAIL_LIST']
 
 # send mail
 def send_mail(mail, to_address)
@@ -73,12 +74,12 @@ end
 namespace :send_mail do
 	desc "send mail for remind to register commitments"
 	task :remind => :environment do
-		send_mail(create_remind_mail, "kamonegi.gg@gmail.com")
+		send_mail(create_remind_mail, MAIL_LIST)
 	end
 
 	desc "send mail for today's result"
 	task :result => :environment do
-		send_mail(create_result_mail, "kamonegi.gg@gmail.com")
+		send_mail(create_result_mail, MAIL_LIST)
 	end
 
 end
