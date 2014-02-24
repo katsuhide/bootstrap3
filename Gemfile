@@ -56,3 +56,6 @@ gem 'newrelic_rpm'
 
 # google analytics
 gem 'google-analytics-rails'
+
+# 認証
+gem 'devise'
