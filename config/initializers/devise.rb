@@ -257,7 +257,7 @@ config.sign_out_via = :delete
 # API key
 if Rails.env.production?
         config.omniauth :facebook, "App ID", "App Secret", :display => 'popup'
-        config.omniauth :twitter,  "Consumer key", "Consumer secret", :display => 'popup'
+        config.omniauth :twitter, ENV['CONSUMER_KEY'] , ENV['CONSUMER_SECRET'], :display => 'popup'
 else
         config.omniauth :facebook, "App ID", "App Secret", :display => 'popup'
         config.omniauth :twitter, ENV['CONSUMER_KEY'] , ENV['CONSUMER_SECRET'], :display => 'popup'
