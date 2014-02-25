@@ -57,5 +57,10 @@ gem 'newrelic_rpm'
 # google analytics
 gem 'google-analytics-rails'
 
-# 認証
+# 認証(devise)
 gem 'devise'
+
+# 認証(oauth)
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
