@@ -1,12 +1,5 @@
 Bootstrap3::Application.routes.draw do
 
-  devise_for :users, :controllers => {
-    # :sessions => "users/sessions",
-    :registrations => "users/registrations",
-    # :passwords => "users/passwords",
-    :omniauth_callbacks => "users/omniauth_callbacks"
-  }
-
  # resources :users
  resources :commitments
 
@@ -17,6 +10,13 @@ Bootstrap3::Application.routes.draw do
   root 'commitments#index'
 
   match 'commitments/new' => 'commitments#new', via: [:get, :post]
+
+  devise_for :users, :controllers => {
+    # :sessions => "users/sessions",
+    # :registrations => "users/registrations",
+    # :passwords => "users/passwords",
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

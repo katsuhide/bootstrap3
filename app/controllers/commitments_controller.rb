@@ -4,7 +4,7 @@ class CommitmentsController < ApplicationController
   # GET /commitments
   # GET /commitments.json
   def index
-    @commitments = Commitment.all
+    @commitments = Commitment.all.where(user_id: current_user.id)
   end
 
   # GET /commitments/1
