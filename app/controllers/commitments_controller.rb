@@ -25,6 +25,7 @@ class CommitmentsController < ApplicationController
   # POST /commitments.json
   def create
     @commitment = Commitment.new(commitment_params)
+    @commitment.user_id = current_user.id
 
     respond_to do |format|
       if @commitment.save
