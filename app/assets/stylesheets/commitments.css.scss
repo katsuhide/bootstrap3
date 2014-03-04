@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$regular_space: 30px;
+
 body {
 	padding-top: 70px;
 }
@@ -19,4 +21,9 @@ body {
 .glyphicon-question-sign {
 	font-size: 2rem;
 	color: #f0ad4e;
+}
+
+.nav-tabs{
+	padding-top: $regular_space;
+	padding-bottom:  $regular_space;
 }

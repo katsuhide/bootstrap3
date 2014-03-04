@@ -1,5 +1,12 @@
 <%= button_to 'New Commitment', new_commitment_path, class:"btn btn-primary" %>
 
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#">Today</a></li>
+    <li><a href="#">Yesterday</a></li>
+    <li><a href="#">All</a></li>
+    <li><%= link_to_function "Greeting", "alert('Hello world!')" %></li>
+</ul>
+
 <table class="table table-striped">
     <thead>
         <tr>
