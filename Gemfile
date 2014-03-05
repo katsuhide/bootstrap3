@@ -64,3 +64,6 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+
+# bootstrap3
+gem 'css3-progress-bar-rails'

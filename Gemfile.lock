@@ -41,6 +41,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    css3-progress-bar-rails (0.5.0)
+      rails (>= 3.1)
     devise (3.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -161,6 +163,7 @@ PLATFORMS
 DEPENDENCIES
   anjlab-bootstrap-rails (~> 3.0.3.0)
   coffee-rails (~> 4.0.0)
+  css3-progress-bar-rails
   devise
   google-analytics-rails
   jbuilder (~> 1.2)

@@ -4,7 +4,10 @@ class CommitmentsController < ApplicationController
   # GET /commitments
   # GET /commitments.json
   def index
-    @commitments = Commitment.all.where(user_id: current_user.id)
+    # @commitments = Commitment.all.where(user_id: current_user.id)
+    @commitments = Commitment.search_by_user_id(current_user.id)
+    search_date = Time.now.strftime("%Y-%m-%d")
+    @today_commitments = Commitment.search_by_date(search_date)
   end
 
   # GET /commitments/1
@@ -27,29 +30,41 @@ class CommitmentsController < ApplicationController
     @commitment = Commitment.new(commitment_params)
     @commitment.user_id = current_user.id
 
-    respond_to do |format|
-      if @commitment.save
-        format.html { redirect_to @commitment, notice: 'Commitment was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @commitment }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @commitment.errors, status: :unprocessable_entity }
-      end
+    if @commitment.save
+      redirect_to commitments_path
+    else
+      render 'new'
     end
+
+    # respond_to do |format|
+    #   if @commitment.save
+    #     format.html { redirect_to @commitment, notice: 'Commitment was successfully created.' }
+    #     format.json { render action: 'show', status: :created, location: @commitment }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @commitment.errors, status: :unprocessable_entity }
+    #   end
+    # end
+
   end
 
   # PATCH/PUT /commitments/1
   # PATCH/PUT /commitments/1.json
   def update
-    respond_to do |format|
-      if @commitment.update(commitment_params)
-        format.html { redirect_to @commitment, notice: 'Commitment was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @commitment.errors, status: :unprocessable_entity }
-      end
+    if @commitment.update(commitment_params)
+      redirect_to commitments_path
+    else
+      render 'edit'
     end
+    # respond_to do |format|
+    #   if @commitment.update(commitment_params)
+    #     format.html { redirect_to @commitment, notice: 'Commitment was successfully updated.' }
+    #     format.json { head :no_content }
+    #   else
+    #     format.html { render action: 'edit' }
+    #     format.json { render json: @commitment.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /commitments/1
@@ -72,4 +87,4 @@ class CommitmentsController < ApplicationController
     def commitment_params
       params.require(:commitment).permit(:title, :is_completed, :due_date, :status)
     end
-end
+  end
