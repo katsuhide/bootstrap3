@@ -2,7 +2,7 @@
 <% today = Date.today %>
 <% today_commitments = @commitments.select{|comm| comm['due_date'] == today} %>
 <% today_completed_commitments = today_commitments.select{|comm| comm['is_completed'] == true}%>
-<% current_progress = 100 * today_completed_commitments.count / today_commitments.count %>
+<% current_progress =  today_commitments.count == 0 ? 0 : 100 * today_completed_commitments.count / today_commitments.count %>
 <%= bootstrap_progress_bar(current_progress, :color => 'success', :striped => true, :active => true) %>
 <!-- end of progress bar -->
 
