@@ -31,7 +31,13 @@
     <tbody>
         <% @commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
         <tr>
-            <td style="text-align:center"><%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %></td>
+            <td style="text-align:center">
+            <% if commitment.status == 'D' %>
+                <%= check_box_tag '', '', commitment.is_completed, {'data-id' => commitment.id } %>
+            <% else %>
+                <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
+            <% end %>
+            </td>
             <td><%= commitment.title %></td>
             <td><%= commitment.due_date %></td>
             <% if commitment.status == 'S' %>
@@ -49,3 +55,11 @@
     </tbody>
 </table>
 
+<script>
+$(function(){
+    $("input[type=checkbox]").click(function() {
+        $.post('/commitments/'+$(this).data('id')+'/toggle');
+        location.reload();
+    });
+});
+</script>

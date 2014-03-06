@@ -77,6 +77,13 @@ class CommitmentsController < ApplicationController
     end
   end
 
+  def toggle
+    set_commitment
+    @commitment.is_completed = !@commitment.is_completed
+    @commitment.save
+    redirect_to commitments_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_commitment
@@ -87,4 +94,4 @@ class CommitmentsController < ApplicationController
     def commitment_params
       params.require(:commitment).permit(:title, :is_completed, :due_date, :status)
     end
-  end
+end
