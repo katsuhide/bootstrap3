@@ -59,7 +59,6 @@
 $(function(){
     $("input[type=checkbox]").click(function() {
         $.post('/commitments/'+$(this).data('id')+'/toggle');
-        location.reload();
     });
 });
 </script>

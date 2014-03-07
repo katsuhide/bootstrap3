@@ -81,7 +81,6 @@ class CommitmentsController < ApplicationController
     set_commitment
     @commitment.is_completed = !@commitment.is_completed
     @commitment.save
-    redirect_to commitments_path
   end
 
   private
