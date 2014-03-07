@@ -8,61 +8,163 @@
 
 <%= button_to 'New Commitment', new_commitment_path, class:"btn btn-primary" %>
 
-<ul class="nav nav-tabs">
-    <li class="active"><a href="#">Today</a></li>
-    <li><a href="#">Yesterday</a></li>
-    <li><a href="#">All</a></li>
-    <li><%= link_to_function "Greeting", "alert('Hello world!')" %></li>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active"><a href="#today" data-toggle="tab">Today</a></li>
+    <li><a href="#yesterday" data-toggle="tab">Yesterday</a></li>
+    <li><a href="#all" data-toggle="tab">All</a></li>
 </ul>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th class="hidden-xs"></th>
-            <th class="hidden-xs">Commitment</th>
-            <th class="hidden-xs">Due Date</th>
-            <th class="hidden-xs">Status</th>
-            <th class="hidden-xs"></th>
-            <th class="hidden-xs"></th>
-            <th class="hidden-xs"></th>
-        </tr>
-    </thead>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="today">
+        <!-- commitment list -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs">id</th>
+                    <th class="hidden-xs">Commitment</th>
+                    <th class="hidden-xs">Due Date</th>
+                    <th class="hidden-xs">Status</th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                </tr>
+            </thead>
 
-    <tbody>
-        <% @commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
-        <tr>
-            <td style="text-align:center">
-                <% if commitment.status == 'D' %>
-                <%= check_box_tag '', '', commitment.is_completed, {'data-id' => commitment.id } %>
-                <% else %>
-                <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
+            <tbody>
+                <% today_commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
+                <tr>
+                    <td style="text-align:center">
+                        <% if commitment.status == 'D' %>
+                        <%= check_box_tag '', '', commitment.is_completed, {'data-id' => commitment.id } %>
+                        <% else %>
+                        <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
+                        <% end %>
+                    </td>
+                    <td><%= commitment.id %></td>
+                    <td><%= commitment.title %></td>
+                    <td><%= commitment.due_date %></td>
+                    <% if commitment.status == 'S' %>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                    <% elsif commitment.status == "F" %>
+                    <td><span class="glyphicon glyphicon-remove"></span></td>
+                    <% else %>
+                    <td><span class="glyphicon glyphicon-question-sign"></span></td>
+                    <% end %>
+                    <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
+                    <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
+                    <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
+                </tr>
                 <% end %>
-            </td>
-            <td><%= commitment.title %></td>
-            <td><%= commitment.due_date %></td>
-            <% if commitment.status == 'S' %>
-            <td><span class="glyphicon glyphicon-ok"></span></td>
-            <% elsif commitment.status == "F" %>
-            <td><span class="glyphicon glyphicon-remove"></span></td>
-            <% else %>
-            <td><span class="glyphicon glyphicon-question-sign"></span></td>
-            <% end %>
-            <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
-            <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
-            <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
-        </tr>
-        <% end %>
-    </tbody>
-</table>
+            </tbody>
+        </table>
+        <!-- end commitment list -->
+    </div>
+    <div class="tab-pane fade" id="yesterday">
+        <!-- commitment list -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs">id</th>
+                    <th class="hidden-xs">Commitment</th>
+                    <th class="hidden-xs">Due Date</th>
+                    <th class="hidden-xs">Status</th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% yesterday_commitment = @commitments.select{|comm| comm['due_date'] == (today - 1) } %>
+                <% yesterday_commitment.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
+                <tr>
+                    <td style="text-align:center">
+                        <% if commitment.status == 'D' %>
+                        <%= check_box_tag '', '', commitment.is_completed, {'data-id' => commitment.id } %>
+                        <% else %>
+                        <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
+                        <% end %>
+                    </td>
+                    <td><%= commitment.id %></td>
+                    <td><%= commitment.title %></td>
+                    <td><%= commitment.due_date %></td>
+                    <% if commitment.status == 'S' %>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                    <% elsif commitment.status == "F" %>
+                    <td><span class="glyphicon glyphicon-remove"></span></td>
+                    <% else %>
+                    <td><span class="glyphicon glyphicon-question-sign"></span></td>
+                    <% end %>
+                    <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
+                    <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
+                    <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <!-- end of yesterday commitment list  -->
+    </div>
+    <div class="tab-pane fade" id="all">
+        <!-- commitment list -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs">id</th>
+                    <th class="hidden-xs">Commitment</th>
+                    <th class="hidden-xs">Due Date</th>
+                    <th class="hidden-xs">Status</th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% @commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
+                <tr>
+                    <td style="text-align:center">
+                        <% if commitment.status == 'D' %>
+                        <%= check_box_tag '', '', commitment.is_completed, {'data-id' => commitment.id } %>
+                        <% else %>
+                        <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
+                        <% end %>
+                    </td>
+                    <td><%= commitment.id %></td>
+                    <td><%= commitment.title %></td>
+                    <td><%= commitment.due_date %></td>
+                    <% if commitment.status == 'S' %>
+                    <td><span class="glyphicon glyphicon-ok"></span></td>
+                    <% elsif commitment.status == "F" %>
+                    <td><span class="glyphicon glyphicon-remove"></span></td>
+                    <% else %>
+                    <td><span class="glyphicon glyphicon-question-sign"></span></td>
+                    <% end %>
+                    <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
+                    <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
+                    <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <!-- end of all commitment list  -->
+    </div>
+</div>
+
 
 <script>
 $(function(){
     $("input[type=checkbox]").click(function() {
         $.post('/commitments/'+$(this).data('id')+'/toggle');
-        console.log("hoge");
-        // setInterval(function(){
+        setInterval(function(){
             location.reload();
-        // }, 1000);
+        }, 1000);
     });
+    $('#myTab a').click(function (e) {
+     // $('#myTab a:last').tab('show')
+     $(this).tab('show');
+ });
 });
 </script>
