@@ -11,58 +11,52 @@
 </div>
 <% end %>
 
-<div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-                <%= f.label :title %>
-        </div>
-        <div class="col-md-8">
-                <%= f.text_area :title, :placeholder => "commitment input", :rows => "3", class:"form-control"%>
-        </div>
-        <div class="col-md-1"></div>
-</div>
-<div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-                <%= f.label :is_completed %><br>
-        </div>
-        <div class="col-md-8">
-                <%= f.check_box :is_completed %>
-        </div>
-        <div class="col-md-1"></div>
-</div>
-<div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-                <%= f.label :due_date %><br>
-        </div>
-        <div class="col-md-8">
-                <%= f.date_select :due_date %>
-        </div>
-        <div class="col-md-1"></div>
-</div>
-<div class="row" >
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-                <%= f.label :status %><br>
-        </div>
-        <div class="col-md-8">
-                <% options = [["Doing", "D"],  ["Success", "S"], ["Failure", "F"]] %>
-                <% selected_status =  @commitment.status.nil? ? "D" : @commitment.status %>
-                <% disable_options = ["S", "F", "D"].reject{|str| str == selected_status} %>
-                <%= f.select :status, options, :disabled => disable_options %>
-        </div>
-        <div class="col-md-1"></div>
-</div>
-<div class="row">
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-8">
-                <div class="actions">
-                        <%= f.submit :class => "btn btn-primary" %>
+<form class="form-horizontal" role="form">
+</form>
+
+<form class="form-horizontal" role="form">
+        <div class="form-group">
+                <div class="col-sm-2 control-label">
+                        <%= f.label :title %>
+                </div>
+                <div class="col-sm-10">
+                        <%= f.text_area :title, :placeholder => "commitment input", :rows => "3", class:"form-control"%>
                 </div>
         </div>
-</div>
-
+        <div class="form-group">
+                <div class="col-sm-2 control-label">
+                        <%= f.label :is_completed %>
+                </div>
+                <div class="col-sm-10">
+                        <%= f.check_box :is_completed %>
+                </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-2 control-label">
+                        <%= f.label :due_date %>
+                </div>
+                <div class="col-sm-10">
+                        <%= f.date_select :due_date %>
+                </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-2 control-label">
+                        <%= f.label :status %><br>
+                </div>
+                <div class="col-sm-10">
+                        <% options = [["Doing", "D"],  ["Success", "S"], ["Failure", "F"]] %>
+                        <% selected_status =  @commitment.status.nil? ? "D" : @commitment.status %>
+                        <% disable_options = ["S", "F", "D"].reject{|str| str == selected_status} %>
+                        <%= f.select :status, options, :disabled => disable_options %>
+                </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                        <div class="actions">
+                                <%= f.submit :class => "btn btn-primary" %>
+                        </div>
+                </div>
+        </div>
+</form>
 
 <% end %>

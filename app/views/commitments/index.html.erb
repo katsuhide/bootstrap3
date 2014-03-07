@@ -1,6 +1,7 @@
 <!-- progress bar -->
 <% today = Date.today %>
 <% today_commitments = @commitments.select{|comm| comm['due_date'] == today} %>
+<% yesterday_commitments = @commitments.select{|comm| comm['due_date'] == (today - 1) } %>
 <% today_completed_commitments = today_commitments.select{|comm| comm['is_completed'] == true}%>
 <% current_progress =  today_commitments.count == 0 ? 0 : 100 * today_completed_commitments.count / today_commitments.count %>
 <%= bootstrap_progress_bar(current_progress, :color => 'success', :striped => true, :active => true) %>
@@ -9,9 +10,9 @@
 <%= button_to 'New Commitment', new_commitment_path, class:"btn btn-primary" %>
 
 <ul id="myTab" class="nav nav-tabs">
-    <li class="active"><a href="#today" data-toggle="tab">Today</a></li>
-    <li><a href="#yesterday" data-toggle="tab">Yesterday</a></li>
-    <li><a href="#all" data-toggle="tab">All</a></li>
+    <li class="active"><a href="#today" data-toggle="tab">Today <span class="badge"><%= today_commitments.count%></span></a></li>
+    <li><a href="#yesterday" data-toggle="tab">Yesterday <span class="badge"><%= yesterday_commitments.count%></span></a></li>
+    <li><a href="#all" data-toggle="tab">All <span class="badge"><%= @commitments.count%></span></a></li>
 </ul>
 
 <div id="myTabContent" class="tab-content">
@@ -21,7 +22,6 @@
             <thead>
                 <tr>
                     <th class="hidden-xs"></th>
-                    <th class="hidden-xs">id</th>
                     <th class="hidden-xs">Commitment</th>
                     <th class="hidden-xs">Due Date</th>
                     <th class="hidden-xs">Status</th>
@@ -41,7 +41,6 @@
                         <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
                         <% end %>
                     </td>
-                    <td><%= commitment.id %></td>
                     <td><%= commitment.title %></td>
                     <td><%= commitment.due_date %></td>
                     <% if commitment.status == 'S' %>
@@ -66,7 +65,6 @@
             <thead>
                 <tr>
                     <th class="hidden-xs"></th>
-                    <th class="hidden-xs">id</th>
                     <th class="hidden-xs">Commitment</th>
                     <th class="hidden-xs">Due Date</th>
                     <th class="hidden-xs">Status</th>
@@ -77,8 +75,7 @@
             </thead>
 
             <tbody>
-                <% yesterday_commitment = @commitments.select{|comm| comm['due_date'] == (today - 1) } %>
-                <% yesterday_commitment.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
+                <% yesterday_commitments.sort {|a, b| b.due_date <=> a.due_date}.each do |commitment| %>
                 <tr>
                     <td style="text-align:center">
                         <% if commitment.status == 'D' %>
@@ -87,7 +84,6 @@
                         <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
                         <% end %>
                     </td>
-                    <td><%= commitment.id %></td>
                     <td><%= commitment.title %></td>
                     <td><%= commitment.due_date %></td>
                     <% if commitment.status == 'S' %>
@@ -112,7 +108,6 @@
             <thead>
                 <tr>
                     <th class="hidden-xs"></th>
-                    <th class="hidden-xs">id</th>
                     <th class="hidden-xs">Commitment</th>
                     <th class="hidden-xs">Due Date</th>
                     <th class="hidden-xs">Status</th>
@@ -132,7 +127,6 @@
                         <%= check_box('commitment', 'is_completed', :checked => commitment.is_completed, :disabled => true) %>
                         <% end %>
                     </td>
-                    <td><%= commitment.id %></td>
                     <td><%= commitment.title %></td>
                     <td><%= commitment.due_date %></td>
                     <% if commitment.status == 'S' %>
@@ -163,8 +157,7 @@ $(function(){
         }, 1000);
     });
     $('#myTab a').click(function (e) {
-     // $('#myTab a:last').tab('show')
-     $(this).tab('show');
- });
+       $(this).tab('show');
+   });
 });
 </script>
