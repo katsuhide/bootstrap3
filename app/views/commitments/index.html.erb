@@ -70,6 +70,7 @@
                     <th class="hidden-xs">Commitment</th>
                     <th class="hidden-xs">Due Date</th>
                     <th class="hidden-xs">Status</th>
+                    <th class="hidden-xs">Repeat</th>
                     <th class="hidden-xs"></th>
                     <th class="hidden-xs"></th>
                     <th class="hidden-xs"></th>
@@ -95,6 +96,7 @@
                     <% else %>
                     <td><span class="glyphicon glyphicon-question-sign"></span></td>
                     <% end %>
+                    <td><%= check_box('repaet', 'repeat', :checked => commitment.repeat, :disabled => true) %></td>
                     <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
                     <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
                     <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
@@ -113,6 +115,7 @@
                     <th class="hidden-xs">Commitment</th>
                     <th class="hidden-xs">Due Date</th>
                     <th class="hidden-xs">Status</th>
+                    <th class="hidden-xs">Repeat</th>
                     <th class="hidden-xs"></th>
                     <th class="hidden-xs"></th>
                     <th class="hidden-xs"></th>
@@ -138,6 +141,7 @@
                     <% else %>
                     <td><span class="glyphicon glyphicon-question-sign"></span></td>
                     <% end %>
+                    <td><%= check_box('repaet', 'repeat', :checked => commitment.repeat, :disabled => true) %></td>
                     <td><%= link_to 'Show', commitment, class:"btn btn-info btn-sm" %></td>
                     <td><%= link_to 'Edit', edit_commitment_path(commitment), class:"btn btn-warning btn-sm" %></td>
                     <td><%= link_to 'Delete', commitment, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger btn-sm" %></td>
