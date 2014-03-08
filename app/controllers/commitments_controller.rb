@@ -92,6 +92,6 @@ class CommitmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def commitment_params
-      params.require(:commitment).permit(:title, :is_completed, :due_date, :status)
+      params.require(:commitment).permit(:title, :is_completed, :due_date, :status, :repeat)
     end
 end
