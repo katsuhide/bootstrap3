@@ -67,3 +67,9 @@ gem 'omniauth-facebook'
 
 # bootstrap3
 gem 'css3-progress-bar-rails'
+
+# debugger
+group :development do
+	gem 'better_errors'
+	gem 'binding_of_caller'
+end
