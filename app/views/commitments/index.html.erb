@@ -4,7 +4,7 @@
 <% yesterday_commitments = @commitments.select{|comm| comm['due_date'] == (today - 1) } %>
 <% today_completed_commitments = today_commitments.select{|comm| comm['is_completed'] == true}%>
 <% current_progress =  today_commitments.count == 0 ? 0 : 100 * today_completed_commitments.count / today_commitments.count %>
-<%= bootstrap_progress_bar(current_progress, :color => 'success', :striped => true, :active => true) %>
+    <%= bootstrap_progress_bar(current_progress, :color => 'success', :striped => true, :active => true) %>
 <!-- end of progress bar -->
 
 <%= button_to 'New Commitment', new_commitment_path, class:"btn btn-primary" %>
@@ -163,7 +163,7 @@ $(function(){
         }, 1000);
     });
     $('#myTab a').click(function (e) {
-       $(this).tab('show');
-   });
+     $(this).tab('show');
+ });
 });
 </script>

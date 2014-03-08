@@ -4,6 +4,7 @@
 	<title><%= content_for?(:title) ? yield(:title) : "Committer" %></title>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<%= csrf_meta_tags %>
 	<%= analytics_init if Rails.env.production? %>
 </head>
@@ -23,7 +24,7 @@
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right ">
 					<li class="dropdown">
 						<a href="/" class="dropdown-toggle" data-toggle="dropdown">
 							<% if user_signed_in? %>
@@ -59,8 +60,9 @@
 	<% if alert %>
 	<p class="alert alert-error"><%= alert %></p>
 	<% end %>
-
-	<%= yield %>
+	<div class="container">
+		<%= yield %>
+	</div>
 
 </body>
 </html>
