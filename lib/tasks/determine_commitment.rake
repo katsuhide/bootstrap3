@@ -21,6 +21,7 @@ def rollover_commitment
 		new_commitment = Commitment.new
 		new_commitment.attributes = commitment.attributes
 		new_commitment.id = nil
+		new_commitment.is_completed = false
 		new_commitment.status = "D"
 		new_commitment.due_date = today
 		new_commitment.save
